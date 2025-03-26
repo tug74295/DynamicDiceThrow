@@ -35,13 +35,21 @@ class MainActivity : AppCompatActivity(), ButtonFragment.ButtonInterface {
                 .beginTransaction()
                 .replace(R.id.container1, ButtonFragment())
                 .replace(R.id.container2, DieFragment())
+                .commit()
         }
     }
 
     // This callback function gets invoked when the child Fragment invokes it
     // Remember to place Fragment transactions on BackStack so then can be reversed
     override fun buttonClicked() {
+        if (findViewById<View>(R.id.container2) == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container1, DieFragment())
+                .addToBackStack(null)
+                .commit()
 
+        }
     }
 
 
